@@ -2,6 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 import DutchAuctionABI from './DutchAuctionABI.json';
+import { contractAddress } from './contractAddress';
+
+const axios = require('axios');
+
 const Auth: React.FC = () => {
     const [userAddress, setUserAddress] = useState<string>('');
     const [userBalance, setUserBalance] = useState<string>('');
@@ -10,9 +14,8 @@ const Auth: React.FC = () => {
     const [articles, setArticles] = useState<any[]>([]);
 =======
     const [auctions, setAuctions] = useState<any[]>([]);
-    const [auctionsRendered, setAuctionsRender] = useState<any[]>([]);
-
-    const contractAddress = "0xB71dBd1Dca1d86419e216892A9d8706bF8b24b88";
+    const [auctionsRendered, setAuctionsRender] = useState<any[]|null>([]);
+    
 
 >>>>>>> f2d998e... affichage du prix reel des articles
     const connectWallet = async () => {
@@ -26,11 +29,16 @@ const Auth: React.FC = () => {
                 // Récupération du solde
                 const ethProvider = new ethers.providers.Web3Provider(window.ethereum);
                 setProvider(ethProvider);
+<<<<<<< HEAD
                 const balance = await ethProvider.getBalance(account);
                 setUserBalance(ethers.utils.formatEther(balance));
 
                 // Récupération des informations du contrat et des articles
                 await fetchContractData(ethProvider);
+=======
+                //const balance = await ethProvider.getBalance(account);
+                //setUserBalance(ethers.utils.formatEther(balance));
+>>>>>>> 01a7887... acheter un article de l'enchere
             } catch (error) {
                 console.error(error);
             }
@@ -39,6 +47,7 @@ const Auth: React.FC = () => {
         }
     };
 
+<<<<<<< HEAD
     const fetchContractData = async (ethProvider: ethers.providers.Web3Provider) => {
         //const contractAddress = "0xcAED01340361323987200C8E74bcBD1a70E19986";
 <<<<<<< HEAD
@@ -78,6 +87,8 @@ const Auth: React.FC = () => {
             </div>
         ));
 =======
+=======
+>>>>>>> 01a7887... acheter un article de l'enchere
     const getPrice = async ( auction:any ) => {
         if( provider ) {
             const contract = new ethers.Contract(contractAddress, DutchAuctionABI, provider);
@@ -96,32 +107,104 @@ const Auth: React.FC = () => {
         }
     }
 
+    const accheterArticle = async ( value:number, auction:any, articleId:any ) => {
+        if( provider ) {
+            const contract = new ethers.Contract(contractAddress, DutchAuctionABI, provider);
+            const articleIndex = articleId;
+            const bidAmount = ethers.utils.parseUnits(value.toString(), 'ether');
+            try {
+              if( provider ) {
+                  const ganacheUrl = 'http://localhost:7545';
+                  // Pour q'il prend en compte le temps ecoulé
+                  await axios.post(ganacheUrl, { jsonrpc: '2.0', method: 'evm_increaseTime', params: [0], id: new Date().getTime() });
+                  await axios.post(ganacheUrl, { jsonrpc: '2.0', method: 'evm_mine', id: 1, });
+              }  
+    
+              let signer = provider.getSigner();
+              // Envoyer transaction
+              let signedTransaction = await signer.sendTransaction({ to: contract.address, value: bidAmount,
+                    data: contract.interface.encodeFunctionData('placeBid', [ articleIndex, auction.id - 1 ]),
+              } );
+    
+              await signedTransaction.wait();
+              setAuctionsRender(null);
+    
+            } catch ( e:any ) {
+                console.log( e );
+            }
+        }
+      };
+
     const renderAuctions = async () => {
-        let obj =  auctions.map( async (auction, index) => {
-            let articles = auction.articles.filter( (a:any) => a.name );
-            
-            let auctionsArticles = articles.map( async (a:any, index:any) => {
-                let price:any = a.currentPrice;
-                
-                let buildArt = (a:any, price:any) => (
+        if(provider) {
+            const contract = new ethers.Contract(contractAddress, DutchAuctionABI, provider);
+            let auct = await contract.getAuctions();
+            let obj =  auct.map( async (auction:any, index:any) => {
+                if (auction.closed) return (<></>);
+
+                let articles = auction.articles.filter( (a:any) => a.name );
+                let auctionsArticles = articles.map( async (a:any, index:any) => {
+                    if (a.closed) return (<></>);
+
+                    const handleSubmit = (e:any) => {
+                        e.preventDefault();
+                        let value = e.target.buy.value;
+                        accheterArticle( value, auction, index );
+                    }
+    
+                    let price:any = a.currentPrice;
                     
-                    <div key={index} style={{border:'1px solid black', padding:'20px', margin: '20px',width:'fit-content', cursor:'pointer'}}>
-                        <div>
-                            {a.name} {( auction.idxArticle.toNumber() == index ) ? '(Current)' : ''}
+                    let buildArt = (a:any, price:any) => {
+                    return (
+                        <div key={index} style={{border:'1px solid black', padding:'20px', margin: '20px',width:'fit-content', cursor:'pointer'}}>
+                            <div>
+                                {a.name} {( auction.idxArticle.toNumber() == index ) ? '(Current)' : ''}
+                            </div>
+                            <div>
+                                Prix: {ethers.utils.formatEther(price)} eth
+                            </div>
+    
+                                {( auction.idxArticle.toNumber() == index ) ? 
+                                    
+                                    (
+                                        <>
+                                            <form onSubmit={handleSubmit}>
+                                                <div style={{padding:'5px 10px', textAlign:'center'}}>
+                                                    <input type="number" name="buy" step="0.1" min="0.2" style={{background:'white', border:'1px solid black', borderRadius: '10px', marginRight:'5px'}}/>
+                                                </div>
+                                                <button type='submit' style={{padding:'5px 10px', background:'#61d961', textAlign:'center'}}>
+                                                    Acheter
+                                                </button>
+                                            </form>
+                                        </>
+                                    ):
+                                    (<></>)
+                                }
                         </div>
+                    );
+                            }
+    
+                    if( auction.idxArticle.toNumber() == index ) {
+                        price = await getPrice(auction);
+                        return buildArt( a, ethers.utils.parseUnits(price.toString(), 'ether'));
+                    } else {
+                        return buildArt( a, price );
+                    }
+                });
+    
+                return (
+                    <div key={index} style={{ margin: '20px', background: 'white'}}>
+                        <div>Enchere {auction.id.toString()}</div>
                         <div>
-                            Prix: {ethers.utils.formatEther(price)} eth
+                            Articles <br/>
+                            <div style={{ display: 'inline-flex'}}>
+                                {auctionsArticles}
+                            </div>
                         </div>
                     </div>
-                );
-
-                if( auction.idxArticle.toNumber() == index ) {
-                    price = await getPrice(auction);
-                    return buildArt( a, ethers.utils.parseUnits(price.toString(), 'ether'));
-                } else {
-                    return buildArt( a, price );
-                }
+                )
             });
+<<<<<<< HEAD
 
             return (
                 <div key={index} style={{ margin: '20px', background: 'white'}}>
@@ -138,6 +221,12 @@ const Auth: React.FC = () => {
 
         return obj;
 >>>>>>> f2d998e... affichage du prix reel des articles
+=======
+    
+            return obj;
+        }
+        return [];
+>>>>>>> 01a7887... acheter un article de l'enchere
     };
 
     useEffect(() => {
