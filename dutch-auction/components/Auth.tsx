@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 import DutchAuctionABI from './DutchAuctionABI.json';
 import { contractAddress } from './contractAddress';
+import { connectWallet } from './connectWallet';
 
 const axios = require('axios');
 
@@ -15,6 +16,7 @@ const Auth: React.FC = () => {
 =======
     const [auctions, setAuctions] = useState<any[]>([]);
     const [auctionsRendered, setAuctionsRender] = useState<any[]|null>([]);
+<<<<<<< HEAD
     
 
 >>>>>>> f2d998e... affichage du prix reel des articles
@@ -46,6 +48,8 @@ const Auth: React.FC = () => {
             console.log('MetaMask is not installed');
         }
     };
+=======
+>>>>>>> 611a2d7... separation du code pour se connecter a metamask
 
 <<<<<<< HEAD
     const fetchContractData = async (ethProvider: ethers.providers.Web3Provider) => {
@@ -240,8 +244,16 @@ const Auth: React.FC = () => {
     }, [ auctionsRendered ])
 
     return (
+<<<<<<< HEAD
         <div>
             <button onClick={connectWallet}>Connect MetaMask</button>
+=======
+        <div style={{ paddingTop: '100px'}}>
+            <button onClick={() => {
+                connectWallet( setUserAddress, setProvider );
+            }
+            }>Connect MetaMask</button>
+>>>>>>> 611a2d7... separation du code pour se connecter a metamask
             {userAddress && (
                 <div>
                     <p>Address: {userAddress}</p>
