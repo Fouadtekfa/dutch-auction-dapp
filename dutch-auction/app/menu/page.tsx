@@ -15,9 +15,7 @@ import Auth from '../../components/Auth';
 export default function Page() {
         
     return (
-
         <>
-         
           <Navbar /> 
          <div style={{ height: '100vh'}}>
              <Auth />

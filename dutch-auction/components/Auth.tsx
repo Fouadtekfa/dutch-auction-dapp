@@ -11,88 +11,9 @@ const Auth: React.FC = () => {
     const [userAddress, setUserAddress] = useState<string>('');
     const [userBalance, setUserBalance] = useState<string>('');
     const [provider, setProvider] = useState<ethers.providers.Web3Provider | null>(null);
-<<<<<<< HEAD
-    const [articles, setArticles] = useState<any[]>([]);
-=======
     const [auctions, setAuctions] = useState<any[]>([]);
     const [auctionsRendered, setAuctionsRender] = useState<any[]|null>([]);
-<<<<<<< HEAD
-    
 
->>>>>>> f2d998e... affichage du prix reel des articles
-    const connectWallet = async () => {
-        if (typeof window !== 'undefined' && typeof window.ethereum !== 'undefined') {
-            try {
-                // Demande de connexion au portefeuille MetaMask
-                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                const account = accounts[0];
-                setUserAddress(account);
-
-                // Récupération du solde
-                const ethProvider = new ethers.providers.Web3Provider(window.ethereum);
-                setProvider(ethProvider);
-<<<<<<< HEAD
-                const balance = await ethProvider.getBalance(account);
-                setUserBalance(ethers.utils.formatEther(balance));
-
-                // Récupération des informations du contrat et des articles
-                await fetchContractData(ethProvider);
-=======
-                //const balance = await ethProvider.getBalance(account);
-                //setUserBalance(ethers.utils.formatEther(balance));
->>>>>>> 01a7887... acheter un article de l'enchere
-            } catch (error) {
-                console.error(error);
-            }
-        } else {
-            console.log('MetaMask is not installed');
-        }
-    };
-=======
->>>>>>> 611a2d7... separation du code pour se connecter a metamask
-
-<<<<<<< HEAD
-    const fetchContractData = async (ethProvider: ethers.providers.Web3Provider) => {
-        //const contractAddress = "0xcAED01340361323987200C8E74bcBD1a70E19986";
-<<<<<<< HEAD
-        const contractAddress = "0xd13AeeEee9414544409d33B2ACC2A5Ff97deBB04";
-        console.log(contractAddress);
-        const contract = new ethers.Contract(contractAddress, DutchAuctionABI, ethProvider);
-
-=======
-        console.log(contractAddress);
-        const contract = new ethers.Contract(contractAddress, DutchAuctionABI, ethProvider);
->>>>>>> f2d998e... affichage du prix reel des articles
-        try {
-            // Récupérer les données des articles
-            const numArticles = await contract.getArticlesCount(); 
-            const fetchedArticles = [];
-
-            for (let i = 0; i < numArticles; i++) {
-                const article = await contract.articles(i);
-                fetchedArticles.push(article);
-            }
-
-            setArticles(fetchedArticles);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-<<<<<<< HEAD
-    const renderArticles = () => {
-        return articles.map((article, index) => (
-            
-            <div key={index}>
-                <p>Name: {article.name}</p>
-                <p>Current Price: {ethers.utils.formatEther(article.currentPrice)} ETH</p>
-                <p>Winning Bidder: {article.winningBidder}</p>
-                <p>Closed: {article.closed ? 'Yes' : 'No'}</p>
-            </div>
-        ));
-=======
-=======
->>>>>>> 01a7887... acheter un article de l'enchere
     const getPrice = async ( auction:any ) => {
         if( provider ) {
             const contract = new ethers.Contract(contractAddress, DutchAuctionABI, provider);
@@ -208,29 +129,10 @@ const Auth: React.FC = () => {
                     </div>
                 )
             });
-<<<<<<< HEAD
-
-            return (
-                <div key={index} style={{ margin: '20px', background: 'white'}}>
-                    <div>Enchere {auction.id.toString()}</div>
-                    <div>
-                        Articles <br/>
-                        <div style={{ display: 'inline-flex'}}>
-                            {auctionsArticles}
-                        </div>
-                    </div>
-                </div>
-            )
-        });
-
-        return obj;
->>>>>>> f2d998e... affichage du prix reel des articles
-=======
     
             return obj;
         }
         return [];
->>>>>>> 01a7887... acheter un article de l'enchere
     };
 
     useEffect(() => {
@@ -244,32 +146,23 @@ const Auth: React.FC = () => {
     }, [ auctionsRendered ])
 
     return (
-<<<<<<< HEAD
-        <div>
-            <button onClick={connectWallet}>Connect MetaMask</button>
-=======
         <div style={{ paddingTop: '100px'}}>
             <button onClick={() => {
                 connectWallet( setUserAddress, setProvider );
             }
             }>Connect MetaMask</button>
->>>>>>> 611a2d7... separation du code pour se connecter a metamask
             {userAddress && (
                 <div>
+                    <div>
                     <p>Address: {userAddress}</p>
                     <p>Balance: {userBalance} ETH</p>
-<<<<<<< HEAD
-                    <h3>Articles:</h3>
-                    {renderArticles()}
-=======
                     </div>
-                    <div style={{ width: '100%', background:'#cdcdcd', marginTop:'50px'}}>
+                    <div style={{ width: '100%', background:'#cdcdcd', marginTop:'50px', padding:'20px'}}>
                         <h1 style={{textAlign:'center'}}>Encheres en cours</h1>
                         <div>
                             {auctionsRendered}
                         </div>
                     </div>
->>>>>>> f2d998e... affichage du prix reel des articles
                 </div>
             )}
         </div>

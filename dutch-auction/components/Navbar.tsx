@@ -6,33 +6,20 @@ const Navbar = () => {
         <div className="container mx-auto flex justify-between items-center">
           <Link href="/menu" passHref>
             <span className="cursor-pointer text-white font-bold text-lg hover:text-cyan-300 transition duration-300 ease-in-out">
-            Link1
+            En cours
             </span>
           </Link>
-
-          <Link href="/" passHref>
+          <Link href="/win" passHref>
             <span className="cursor-pointer text-white font-bold text-lg hover:text-cyan-300 transition duration-300 ease-in-out">
-            Link2
-            </span>
-          </Link>
-          <Link href="/" passHref>
-            <span className="cursor-pointer text-white font-bold text-lg hover:text-cyan-300 transition duration-300 ease-in-out">
-            Link3
+            Encheres Gagnés
             </span>
           </Link>
           <Link href="/" passHref>
             <span className="cursor-pointer text-white font-bold text-lg hover:text-cyan-300 transition duration-300 ease-in-out">
-            Link4
+            Encheres Perdus
 
             </span>
           </Link>
-
-          <Link href="/" passHref>
-            <span className="cursor-pointer text-white font-bold text-lg hover:text-cyan-300 transition duration-300 ease-in-out">
-            Link5
-            </span>
-          </Link>
-
         </div>
 
 
