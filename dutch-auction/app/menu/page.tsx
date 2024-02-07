@@ -1,4 +1,3 @@
-"use client"
 import React from 'react';
 import { ethers } from "ethers";
 import Navbar from "../../components/Navbar";
