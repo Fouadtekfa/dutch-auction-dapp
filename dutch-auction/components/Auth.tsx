@@ -82,7 +82,7 @@ const Auth: React.FC = () => {
                     
                     let buildArt = (a:any, price:any) => {
                     return (
-                        <div key={index} style={{border:'1px solid black', padding:'20px', margin: '20px',width:'fit-content', cursor:'pointer'}}>
+                        <div key={index} style={{border:'1px solid black', padding:'20px', margin: '20px',width:'fit-content', cursor:'pointer', background:'#e1dbe7'}}>
                             <div>
                                 {a.name} {( auction.idxArticle.toNumber() == index ) ? '(Current)' : ''}
                             </div>
@@ -119,7 +119,7 @@ const Auth: React.FC = () => {
                 });
     
                 return (
-                    <div key={index} style={{ margin: '20px', background: 'white'}}>
+                    <div key={index} style={{ margin: '20px', background: 'white', padding:'20px', border:'1px solid black', borderRadius:'3%'}}>
                         <div>Enchere {auction.id.toString()}</div>
                         <div>
                             Articles <br/>
@@ -185,46 +185,57 @@ const Auth: React.FC = () => {
 
     return (
         <div style={{ paddingTop: '100px'}}>
-            <button onClick={() => {
-                connectWallet( setUserAddress, setProvider );
-            }
-            }>Connect MetaMask</button>
+            <div style={{width:'100%', textAlign:'center'}}>
+                <button style={{ background:'black', color:'white', padding:'10px', borderRadius:'10px'}} onClick={() => {
+                    connectWallet( setUserAddress, setProvider );
+                }
+                }>Connect MetaMask</button>
+            </div>
             {userAddress && (
                 <div>
                     <div>
                     <p>Address: {userAddress}</p>
                     <p>Balance: {userBalance} ETH</p>
                     </div>
-                    <div style={{ display: 'inline-flex', background: 'black', width:'100%'}}>
-                        <div style={{ width: '30%', background:'#cdcdcd', marginTop:'50px', padding:'20px', margin: '10px'}}>
-                            <h2 style={{textAlign:'center'}}>Créer un enchère</h2>
-                            <form onSubmit={onSubmit} style={{display: 'block'}}>
-                                <div style={{display: 'inline-flex'}}>
-                                    <div>
-                                        <div style={{ background:'#cdcccc', margin: '10px auto', padding: '10px', width:'fit-content', borderRadius:'5px'}}>
-                                            <div>
-                                                <h5>Articles de l'enchère</h5>
-                                            </div>
-                                            { articles }
-                                            <div style={{margin: '10px'}}>
-                                                <button onClick={ajoutArticleEnchere} type="button" style={{background: '#70c570', padding: '10px', borderRadius: '10px', border: '1px solid black'}}>Ajouter</button>
+                    <div style={{padding:'20px'}}>
+                        <div style={{ display: 'inline-flex', background: '#3d3d3d', width:'100%'}}>
+                            <div style={{ borderRadius:'3px', width: '30%', background:'#cdcdcd', marginTop:'50px', padding:'20px', margin: '10px'}}>
+                                <h2 style={{textAlign:'center'}}>Créer un enchère</h2>
+                                <form onSubmit={onSubmit} style={{display: 'block'}}>
+                                    <div style={{display: 'inline-flex'}}>
+                                        <div>
+                                            <div style={{ background:'#cdcccc', margin: '10px auto', padding: '10px', width:'fit-content', borderRadius:'15px'}}>
+                                                <div>
+                                                    <h5>Articles de l'enchère</h5>
+                                                </div>
+                                                { articles }
+                                                <div style={{margin: '10px'}}>
+                                                    <button onClick={ajoutArticleEnchere} type="button" style={{background: '#70c570', padding: '10px', borderRadius: '10px', border: '1px solid black'}}>Ajouter</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div style={{marginTop:'20px'}}>
-                                    <button type="submit" style={{background: '#7EC9EB', padding: '10px', borderRadius: '10px', border: '1px solid black', margin:'10px'}}>Creer</button>
-                                    <button type="button" onClick={() => {
-                                        setArticles([]);
-                                    }} style={{background: '#d77a7a', padding: '10px', borderRadius: '10px', border: '1px solid black', margin:'10px'}}>Annuler</button>
-                                </div>
+                                    {
+                                        (articles.length > 0 ) ? 
+                                        (<>
+                                        <div style={{marginTop:'20px'}}>
+                                        <button type="submit" style={{background: '#7EC9EB', padding: '10px', borderRadius: '10px', border: '1px solid black', margin:'10px'}}>Creer</button>
+                                        <button type="button" onClick={() => {
+                                            setArticles([]);
+                                        }} style={{background: '#d77a7a', padding: '10px', borderRadius: '10px', border: '1px solid black', margin:'10px'}}>Annuler</button>
+                                        </div>
+                                        </>) :
+                                        (<></>)
+                                    }
+                                    
 
-                            </form>
-                        </div>
-                        <div style={{ width: '100%', background:'#cdcdcd', marginTop:'50px', padding:'20px', margin: '10px'}}>
-                            <h2 style={{textAlign:'center'}}>Encheres en cours</h2>
-                            <div>
-                                {auctionsRendered}
+                                </form>
+                            </div>
+                            <div style={{ borderRadius:'3px', width: '100%', background:'#cdcdcd', marginTop:'50px', padding:'20px', margin: '10px'}}>
+                                <h2 style={{textAlign:'center'}}>Encheres en cours</h2>
+                                <div>
+                                    {auctionsRendered}
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -30,7 +30,7 @@ const Win: React.FC = () => {
                     if (!a.closed || a.winningBidder == addresSigner) return (<></>);
     
                     return (
-                        <div key={index} style={{border:'1px solid black', padding:'20px', margin: '20px',width:'fit-content', cursor:'pointer'}}>
+                        <div key={index} style={{border:'1px solid black', padding:'20px', margin: '20px',width:'fit-content', cursor:'pointer', background:'#e1dbe7'}}>
                             <div>
                                 {a.name} {( auction.idxArticle.toNumber() == index ) ? '(Current)' : ''}
                             </div>
@@ -42,7 +42,7 @@ const Win: React.FC = () => {
                 });
     
                 return (
-                    <div key={index} style={{ margin: '20px', background: 'white'}}>
+                    <div key={index} style={{ margin: '20px', background: 'white', padding:'20px', border:'1px solid black', borderRadius:'3%'}}>
                         <div>Enchere {auction.id.toString()}</div>
                         <div>
                             Articles <br/>
