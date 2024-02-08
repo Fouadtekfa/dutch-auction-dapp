@@ -14,10 +14,9 @@ const Navbar = () => {
             Encheres Gagnés
             </span>
           </Link>
-          <Link href="/" passHref>
+          <Link href="/lose" passHref>
             <span className="cursor-pointer text-white font-bold text-lg hover:text-cyan-300 transition duration-300 ease-in-out">
             Encheres Perdus
-
             </span>
           </Link>
         </div>
