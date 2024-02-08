@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 import DutchAuctionABI from './DutchAuctionABI.json';
 import { contractAddress } from './contractAddress';
@@ -13,6 +13,7 @@ const Auth: React.FC = () => {
     const [provider, setProvider] = useState<ethers.providers.Web3Provider | null>(null);
     const [auctions, setAuctions] = useState<any[]>([]);
     const [auctionsRendered, setAuctionsRender] = useState<any[]|null>([]);
+    const [ articles, setArticles ] = useState<any[]>([]);
 
     const getPrice = async ( auction:any ) => {
         if( provider ) {
@@ -145,6 +146,43 @@ const Auth: React.FC = () => {
         return () => clearInterval(interval);
     }, [ auctionsRendered ])
 
+    const ajoutArticleEnchere = () => {
+        let newArticles = [ ...articles ];
+        newArticles.push(<div style={{margin:'10px'}} key={articles.length}><input type="text" name="article" style={{border: '1px solid gray', padding:'10px'}}/></div>);
+        setArticles(newArticles);
+    };
+
+    async function onSubmit(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+     
+        const formData = new FormData(event.currentTarget)
+        
+        // Recuperer les articles
+        let sendArticles = formData.getAll('article');
+
+        if( sendArticles.length > 0 ) {
+            if( provider ) {
+                let data = [ sendArticles ];
+                try {
+                    // Creer l'enchere
+                    let signer = provider.getSigner();
+                    const contract = new ethers.Contract(contractAddress, DutchAuctionABI, provider);
+                    const signedTransaction = await signer.sendTransaction({
+                          to: contract.address,
+                          value: 0,
+                          data: contract.interface.encodeFunctionData('newAuction', data ),
+                    } );
+        
+                    await signedTransaction.wait();
+                    setArticles([]);
+
+                  } catch ( e:any ) {
+                    console.log( e );
+                  }
+            }
+        }
+      }
+
     return (
         <div style={{ paddingTop: '100px'}}>
             <button onClick={() => {
@@ -157,10 +195,37 @@ const Auth: React.FC = () => {
                     <p>Address: {userAddress}</p>
                     <p>Balance: {userBalance} ETH</p>
                     </div>
-                    <div style={{ width: '100%', background:'#cdcdcd', marginTop:'50px', padding:'20px'}}>
-                        <h1 style={{textAlign:'center'}}>Encheres en cours</h1>
-                        <div>
-                            {auctionsRendered}
+                    <div style={{ display: 'inline-flex', background: 'black', width:'100%'}}>
+                        <div style={{ width: '30%', background:'#cdcdcd', marginTop:'50px', padding:'20px', margin: '10px'}}>
+                            <h2 style={{textAlign:'center'}}>Créer un enchère</h2>
+                            <form onSubmit={onSubmit} style={{display: 'block'}}>
+                                <div style={{display: 'inline-flex'}}>
+                                    <div>
+                                        <div style={{ background:'#cdcccc', margin: '10px auto', padding: '10px', width:'fit-content', borderRadius:'5px'}}>
+                                            <div>
+                                                <h5>Articles de l'enchère</h5>
+                                            </div>
+                                            { articles }
+                                            <div style={{margin: '10px'}}>
+                                                <button onClick={ajoutArticleEnchere} type="button" style={{background: '#70c570', padding: '10px', borderRadius: '10px', border: '1px solid black'}}>Ajouter</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style={{marginTop:'20px'}}>
+                                    <button type="submit" style={{background: '#7EC9EB', padding: '10px', borderRadius: '10px', border: '1px solid black', margin:'10px'}}>Creer</button>
+                                    <button type="button" onClick={() => {
+                                        setArticles([]);
+                                    }} style={{background: '#d77a7a', padding: '10px', borderRadius: '10px', border: '1px solid black', margin:'10px'}}>Annuler</button>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div style={{ width: '100%', background:'#cdcdcd', marginTop:'50px', padding:'20px', margin: '10px'}}>
+                            <h2 style={{textAlign:'center'}}>Encheres en cours</h2>
+                            <div>
+                                {auctionsRendered}
+                            </div>
                         </div>
                     </div>
                 </div>

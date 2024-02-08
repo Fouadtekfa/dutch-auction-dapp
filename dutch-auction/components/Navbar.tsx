@@ -20,9 +20,6 @@ const Navbar = () => {
             </span>
           </Link>
         </div>
-
-
-        
       </nav>
     );
   };
