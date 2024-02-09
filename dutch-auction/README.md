@@ -18,10 +18,6 @@ Les données du portefeuille, notamment la clé publique et le solde en ETH.
 ![Capture2](./Capture/Capture2.png)
 
  
-
-
-
-
 **2. Gestion des Enchères**
 
 La fonctionnalité principale de l'application est la gestion des enchères, qui comprend les éléments suivants :
@@ -32,17 +28,13 @@ La fonctionnalité principale de l'application est la gestion des enchères, qui
 
   
 
-
-- **Création d'une Enchère :** Les propriétaires peuvent créer de nouvelles enchères en spécifiant les paramètres nécessaires. Pour créer une ou plusieurs enchères, cliquez sur "Ajouter". Une fois que vous avez terminé de créer votre liste, cliquez sur "Créer". Vous devrez également insérer le mot de passe de MetaMask pour finaliser la création. Si vous souhaitez annuler, cliquez sur "Annuler".
+**Création d'une Enchère :**  Pour ajouter plusieurs articles à une enchère, cliquez sur "Ajouter". Une fois que la liste des articles est terminée, cliquez sur "Créer" pour finaliser l'enchère. Vous devrez également insérer le mot de passe de MetaMask pour finaliser la création. Si vous souhaitez annuler, cliquez sur "Annuler".
 
 ![Capture3](./Capture/Capture3.png)
-
-
 
 ![Capture4](./Capture/Capture4.png)
 
 
-  
 - **Enchérir:** Les utilisateurs peuvent participer à une ou plusieurs enchères en cours en suivant ces étapes simples :
    Indiquez le prix que vous êtes prêt à payer et cliquez sur "Acheter" pour soumettre votre offre.
 
@@ -52,10 +44,8 @@ La fonctionnalité principale de l'application est la gestion des enchères, qui
 - Vous y trouverez l'article que vous avez remporté répertorié dans la liste des enchères gagnées. 
 - Les versements seront effectués selon les modalités convenues lors de la participation à l'enchère
 
-
  ![Capture6](./Capture/Capture6.png)
 
-  
 - Si vous changez de compte, vous trouverez cette enchère répertoriée dans la section "Enchères Perdues" 
 
  ![Capture7](./Capture/Capture7.png)
@@ -68,14 +58,11 @@ La fonctionnalité principale de l'application est la gestion des enchères, qui
 
 - Vous pouvez enchérir directement sur une autre  enchère, mais dans la même enchère, il est nécessaire d'attendre que l'article en cours soit acheté ou que l'enchère soit close avant de pouvoir enchérir sur un  nouveau.
 
-
  ![Capture9](./Capture/Capture9.png)
-
 
 - Vous y trouverez l'article que vous avez remporté répertorié dans la liste des enchères gagnées. 
 
  ![Capture10](./Capture/Capture10.png)
-
 
 - Si vous changez de compte, vous trouverez cette enchère répertoriée dans la section "Enchères Perdues"
 
