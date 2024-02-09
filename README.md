@@ -5,8 +5,7 @@
 |   Fouad  |  TEKFA  |
 
 
-Dans ce rapport, vous trouverez des informations détaillées sur le processus de vente aux enchères néerlandaises. Pour plus de détails, veuillez consulter [ce rapport](./dutch-auction/README.md).
-
+Dans ce [ce rapport](./dutch-auction/README.md), vous trouverez des instructions détaillées sur l'utilisation de l'application.
 
 ---
 

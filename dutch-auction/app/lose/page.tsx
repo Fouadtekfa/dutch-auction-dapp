@@ -80,7 +80,7 @@ const Win: React.FC = () => {
                     <div>
                     </div>
                     <div style={{ width: '100%', background:'#cdcdcd', marginTop:'50px', padding:'20px'}}>
-                        <h1 style={{textAlign:'center'}}>Encheres en gagnés</h1>
+                        <h1 style={{textAlign:'center'}}> Encheres Perdus</h1>
                         <div>
                             {auctionsRendered}
                         </div>
