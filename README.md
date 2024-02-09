@@ -2,7 +2,38 @@
 
 |   Nom   | Prénom |
 |---------|--------|
-|   Doe   |  Jane  |
+|   Fouad  |  TEKFA  |
+
+
+Dans ce rapport, vous trouverez des informations détaillées sur le processus de vente aux enchères néerlandaises. Pour plus de détails, veuillez consulter [ce rapport](./dutch-auction/README.md).
+
+
+---
+
+**Étapes pour Exécuter le Projet :**
+
+1. **Cloner le Contrat :**
+   - Clonez le contrat à partir du lien suivant : [https://www-apps.univ-lehavre.fr/forge/tf176193/dutch-auction](https://www-apps.univ-lehavre.fr/forge/tf176193/dutch-auction).
+
+2. **Ouvrir Ganache :**
+   - Lancez Ganache, votre environnement de développement blockchain local.
+
+3. **Migration du Contrat :**
+   - Utilisez Truffle pour migrer le contrat en exécutant la commande `truffle migrate`.
+
+4. **Mise à Jour de l'Adresse du Contrat :**
+   - Une fois le contrat déployé, copiez l'identifiant du contrat et mettez à jour le fichier `components/contractAddress.tsx` avec cette adresse.
+
+5. **Installation des Dépendances :**
+   - Accédez au répertoire de votre projet dApp et exécutez la commande `npm install` pour installer toutes les dépendances nécessaires.
+
+6. **Vérification de la Configuration Ganache :**
+   - Assurez-vous que `ganacheUrl = 'http://localhost:7545'` dans votre projet pour vous connecter correctement à Ganache.
+
+---
+
+
+
 
 Le TP est à réaliser individuellement.
 
