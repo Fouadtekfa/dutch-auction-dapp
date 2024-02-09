@@ -67,3 +67,9 @@ La fonctionnalité principale de l'application est la gestion des enchères, qui
 - Si vous changez de compte, vous trouverez cette enchère répertoriée dans la section "Enchères Perdues"
 
  ![Capture11](./Capture/Capture11.png)
+
+
+
+## Remarque 
+
+Afin de réaliser cette application, des modifications ont été apportées au smart contract
