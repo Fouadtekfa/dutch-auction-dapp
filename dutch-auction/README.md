@@ -56,8 +56,27 @@ La fonctionnalité principale de l'application est la gestion des enchères, qui
  ![Capture6](./Capture/Capture6.png)
 
   
-- Si vous changez de compte, vous trouverez cette enchère répertoriée dans la section "Enchères Perdues" dans le cas où vous n'avez pas remporté l'enchère.
+- Si vous changez de compte, vous trouverez cette enchère répertoriée dans la section "Enchères Perdues" 
 
  ![Capture7](./Capture/Capture7.png)
 
 
+- Une fois que vous avez acheté un article, cet article ne sera plus disponible dans la liste des enchères en cours.
+
+ ![Capture8](./Capture/Capture8.png)
+
+
+- Vous pouvez enchérir directement sur une autre  enchère, mais dans la même enchère, il est nécessaire d'attendre que l'article en cours soit acheté ou que l'enchère soit close avant de pouvoir enchérir sur un  nouveau.
+
+
+ ![Capture9](./Capture/Capture9.png)
+
+
+- Vous y trouverez l'article que vous avez remporté répertorié dans la liste des enchères gagnées. 
+
+ ![Capture10](./Capture/Capture10.png)
+
+
+- Si vous changez de compte, vous trouverez cette enchère répertoriée dans la section "Enchères Perdues"
+
+ ![Capture11](./Capture/Capture11.png)
