@@ -12,7 +12,7 @@ Dans ce [ce rapport](./dutch-auction/README.md), vous trouverez des instructions
 **Étapes pour Exécuter le Projet :**
 
 1. **Cloner le Contrat :**
-   - Clonez le contrat à partir du lien suivant : [https://www-apps.univ-lehavre.fr/forge/tf176193/dutch-auction](https://www-apps.univ-lehavre.fr/forge/tf176193/dutch-auction).
+   - Clonez le contrat à partir du lien suivant : [[https://github.com/Fouadtekfa/dutch-auction-.git](https://github.com/Fouadtekfa/dutch-auction-.git)](https://github.com/Fouadtekfa/dutch-auction-.git).
 
 2. **Ouvrir Ganache :**
    - Lancez Ganache, votre environnement de développement blockchain local.
